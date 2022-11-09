@@ -51,6 +51,16 @@ public class DriveTrain extends SubsystemBase{
         m_leftFrontVictor.set(ControlMode.PercentOutput, leftSpeed);
         m_rightFrontVictor.set(ControlMode.PercentOutput, rightSpeed);
         m_rightBackVictor.set(ControlMode.PercentOutput, rightSpeed);
+
+    }
+
+    public void turnRight(double speed){
+
+        m_leftBackVictor.set(ControlMode.PercentOutput, speed);
+        m_leftFrontVictor.set(ControlMode.PercentOutput, speed);
+        m_rightFrontVictor.set(ControlMode.PercentOutput, -speed);
+        m_rightBackVictor.set(ControlMode.PercentOutput, -speed);
+
     }
 
 

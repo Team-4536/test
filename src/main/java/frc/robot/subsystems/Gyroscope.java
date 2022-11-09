@@ -19,6 +19,12 @@ public class Gyroscope extends SubsystemBase{
         return m_gyroscope.getAngle();
 
     }
+
+    public void resetGyroscope(){
+
+        m_gyroscope.reset();
+
+    }
     
     
 }
