@@ -1,29 +1,41 @@
 package frc.robot.subsystems;
 
-import javax.swing.plaf.basic.BasicTabbedPaneUI.TabSelectionHandler;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
-import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
+import frc.robot.Constants.DriveInfo;
 
 
 
 public class DriveTrain extends SubsystemBase{
 
-    VictorSPX m_leftFrontVictor;
-    VictorSPX m_leftBackVictor;
-    VictorSPX m_rightFrontVictor;
-    VictorSPX m_rightBackVictor;    
+    public VictorSPX m_leftFrontVictor;
+    public VictorSPX m_leftBackVictor;
+    public VictorSPX m_rightFrontVictor;
+    public VictorSPX m_rightBackVictor;    
+
+    public Encoder m_encoderLF;
+
+
 
     public DriveTrain(Gyroscope gyrscope){
 
-        m_leftFrontVictor = new VictorSPX(0);
-        m_leftBackVictor = new VictorSPX(3);
-        m_rightFrontVictor = new VictorSPX(1);
-        m_rightBackVictor = new VictorSPX(2);
+        //motors assigned port values
+
+        m_leftFrontVictor = new VictorSPX(Constants.DriveInfo.LEFT_FRONT_DRIVE_MOTOR_ID);
+        m_leftBackVictor = new VictorSPX(Constants.DriveInfo.LEFT_REAR_DRIVE_MOTOR_ID);
+        m_rightFrontVictor = new VictorSPX(Constants.DriveInfo.RIGHT_FRONT_DRIVE_MOTOR_ID);
+        m_rightBackVictor = new VictorSPX(Constants.DriveInfo.RIGHT_REAR_DRIVE_MOTOR_ID);
+    
+
+        m_encoderLF = new Encoder(Constants.DriveInfo.RIGHT_DRIVE_ENCODER_CHANNEL_A,
+        Constants.DriveInfo.RIGHT_DRIVE_ENCODER_CHANNEL_B, 
+        Constants.DriveInfo.RIGHT_DRIVE_ENCODER_IS_INVERTED, 
+        Constants.DriveInfo.DRIVE_MOTOR_ENCODER_ENCODINGTYPE); 
 
         m_rightBackVictor.setInverted(true);
         m_rightFrontVictor.setInverted(true);
