@@ -10,7 +10,7 @@ public class TurnDegree extends CommandBase{
     DriveTrain m_driveTrain;
     Gyroscope m_gyroscope;
     Double m_goalAngle;
-
+    
     public TurnDegree(Gyroscope gav, DriveTrain gav2, Double angle){
 
         m_gyroscope = gav;
@@ -18,14 +18,14 @@ public class TurnDegree extends CommandBase{
         m_goalAngle = angle;
 
     }
-
+    //gets gyroscope and drivetrain and the angle we want into turndegree
     @Override
     public void initialize() {
       
         m_gyroscope.resetGyroscope();
 
     }
-
+    //reset gyroscope
     @Override
     public void execute() {
    
@@ -33,13 +33,15 @@ public class TurnDegree extends CommandBase{
 
     }
 
+
+    //this stops the robot once the goal angle is reached
     @Override
     public boolean isFinished() {
         
         return (m_gyroscope.getAngle() >= m_goalAngle);
 
     }
-
+    //returns true if the angle is at or above goal angle meaning turn is finished
 
     
     
