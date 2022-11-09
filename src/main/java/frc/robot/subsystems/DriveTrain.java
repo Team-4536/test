@@ -16,9 +16,11 @@ public class DriveTrain extends SubsystemBase{
     VictorSPX m_leftFrontVictor;
     VictorSPX m_leftBackVictor;
     VictorSPX m_rightFrontVictor;
-    VictorSPX m_rightBackVictor;    
+    VictorSPX m_rightBackVictor;  
+    
+    Gyroscope m_gyroscope;
 
-    public DriveTrain(Gyroscope gyrscope){
+    public DriveTrain(Gyroscope gyr0scop3){
 
         m_leftFrontVictor = new VictorSPX(0);
         m_leftBackVictor = new VictorSPX(3);
@@ -27,7 +29,9 @@ public class DriveTrain extends SubsystemBase{
 
         m_rightBackVictor.setInverted(true);
         m_rightFrontVictor.setInverted(true);
-   
+
+        m_gyroscope = gyr0scop3;
+        
     }
 
 
@@ -78,7 +82,7 @@ public class DriveTrain extends SubsystemBase{
         double maxLeftVal = Math.max(leftBack, leftFront);
         double maxRightVal = Math.max(rightBack, rightFront);
         double maxVal = Math.max(maxRightVal, maxLeftVal);
-        
+
         if (maxVal >= 1){
             leftFront /= maxVal;
             leftBack/= maxVal;
@@ -101,6 +105,8 @@ public class DriveTrain extends SubsystemBase{
         SmartDashboard.putNumber("BL", m_leftBackVictor.getMotorOutputPercent());
         SmartDashboard.putNumber("FR", m_rightFrontVictor.getMotorOutputPercent());
         SmartDashboard.putNumber("BR", m_rightBackVictor.getMotorOutputPercent());
+
+        SmartDashboard.putNumber("Angle", m_gyroscope.getAngle());
        
 
     }
