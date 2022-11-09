@@ -11,11 +11,11 @@ public class TurnDegree extends CommandBase{
     Gyroscope m_gyroscope;
     Double m_goalAngle;
 
-    public TurnDegree(Gyroscope gav, DriveTrain gav2, Double wienrs){
+    public TurnDegree(Gyroscope gav, DriveTrain gav2, Double angle){
 
         m_gyroscope = gav;
         m_driveTrain = gav2;
-        m_goalAngle = wienrs;
+        m_goalAngle = angle;
 
     }
 
@@ -29,7 +29,14 @@ public class TurnDegree extends CommandBase{
     @Override
     public void execute() {
    
+        m_driveTrain.turnRight(0.5);
+
+    }
+
+    @Override
+    public boolean isFinished() {
         
+        return (m_gyroscope.getAngle() >= m_goalAngle);
 
     }
 
