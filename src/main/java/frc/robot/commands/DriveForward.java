@@ -40,7 +40,7 @@ public class DriveForward extends CommandBase {
     @Override
     public boolean isFinished() {
         return false;
-        int encoderLF = m_driveTrain.m_leftFrontVictor.encode
+       //S int encoderLF = m_driveTrain.m_leftFrontVictor.encode
         
     }
 }
