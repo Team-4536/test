@@ -21,15 +21,19 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 public class RobotContainer {
 
+  //subsystem instances
   private final Gyroscope m_gyroscope;
   private final DriveTrain m_driveTrain;
 
+  //joysticks and related objects instances
   private final Joystick m_joystick;
   private final JoystickButton m_turnButton;
 
+  //command instances
   private final TurnDegree m_turnDegree;
 
 
+  //define instance variables and run methods to set button commands and default commands
   public RobotContainer() {
 
     m_gyroscope = new Gyroscope();
@@ -48,7 +52,7 @@ public class RobotContainer {
 
   
 
-
+  //method to give the buttons command outputs
   private void configureButtonBindings() {
 
     m_turnButton.whenPressed(m_turnDegree);
@@ -56,6 +60,7 @@ public class RobotContainer {
   }
 
 
+  //method to set default commands on subsystems of the robot
   private void setDefaultCommands(){
 
     m_driveTrain.setDefaultCommand(new RunCommand(()-> m_driveTrain.cartesianDrive(m_joystick.getY(), m_joystick.getX(), m_joystick.getZ()), m_driveTrain));
@@ -63,10 +68,11 @@ public class RobotContainer {
   }
 
   
-
+  //method to set a command to be scheduled during the autonomous period
   public Command getAutonomousCommand() {
     
     return null;
 
   }
+
 }
