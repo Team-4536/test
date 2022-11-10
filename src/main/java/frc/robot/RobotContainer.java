@@ -25,7 +25,6 @@ public class RobotContainer {
   private final DriveTrain m_driveTrain;
 
   private final Joystick m_joystick;
-
   private final JoystickButton m_turnButton;
 
   private final TurnDegree m_turnDegree;
