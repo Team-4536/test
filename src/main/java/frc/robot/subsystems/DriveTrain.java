@@ -1,11 +1,8 @@
 package frc.robot.subsystems;
 
-import javax.swing.plaf.basic.BasicTabbedPaneUI.TabSelectionHandler;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
-import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
