@@ -15,8 +15,6 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 
-
-
 public class RobotContainer {
 
   //subsystem instances
@@ -49,7 +47,6 @@ public class RobotContainer {
   }
 
   
-
   //method to give the buttons command outputs
   private void configureButtonBindings() {
 

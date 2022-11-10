@@ -39,6 +39,7 @@ public class TurnDegree extends CommandBase{
     }
 
 
+    //stop the robot when the command is done
     @Override
     public void end(boolean interrupted) {
         
