@@ -13,13 +13,17 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class DriveTrain extends SubsystemBase{
 
+    //Victor SPX motor controller instance variables
     VictorSPX m_leftFrontVictor;
     VictorSPX m_leftBackVictor;
     VictorSPX m_rightFrontVictor;
     VictorSPX m_rightBackVictor;  
-    
+
+    //gyroscope instance variable
     Gyroscope m_gyroscope;
 
+
+    //define instance variables and invert motors where necessary
     public DriveTrain(Gyroscope gyr0scop3){
 
         m_leftFrontVictor = new VictorSPX(0);
@@ -27,6 +31,8 @@ public class DriveTrain extends SubsystemBase{
         m_rightFrontVictor = new VictorSPX(1);
         m_rightBackVictor = new VictorSPX(2);
 
+        m_leftFrontVictor.setInverted(false);
+        m_leftBackVictor.setInverted(false);
         m_rightBackVictor.setInverted(true);
         m_rightFrontVictor.setInverted(true);
 
@@ -34,7 +40,7 @@ public class DriveTrain extends SubsystemBase{
         
     }
 
-
+    //method to drive moving all wheels in the same direciton
     public void DriveInput(double speed){
 
         m_leftBackVictor.set(ControlMode.PercentOutput, speed);
@@ -44,7 +50,7 @@ public class DriveTrain extends SubsystemBase{
 
     }
 
-
+    //method to drive by giving each set of wheels based on left or right side of robot different speeds
     public void tankDrive(double leftSpeed, double rightSpeed){
 
         m_leftBackVictor.set(ControlMode.PercentOutput, leftSpeed);
@@ -54,7 +60,8 @@ public class DriveTrain extends SubsystemBase{
 
     }
 
-    public void turnRight(double speed){
+    //method to turn robot, turn right when speed is positive
+    public void turn(double speed){
 
         m_leftBackVictor.set(ControlMode.PercentOutput, speed);
         m_leftFrontVictor.set(ControlMode.PercentOutput, speed);
@@ -63,7 +70,17 @@ public class DriveTrain extends SubsystemBase{
 
     }
 
+    //method to stop motor output
+    public void stopDriving(){
 
+        m_leftBackVictor.set(ControlMode.PercentOutput, 0);
+        m_leftFrontVictor.set(ControlMode.PercentOutput, 0);
+        m_rightFrontVictor.set(ControlMode.PercentOutput, 0);
+        m_rightBackVictor.set(ControlMode.PercentOutput, 0);
+
+    }
+
+    //method for driving based on x, y, and z values of a joystick
     public void cartesianDrive (double forward, double sideways, double spin){
 
         //damp drive values
@@ -71,9 +88,11 @@ public class DriveTrain extends SubsystemBase{
         spin *= .6;
         sideways *= 1;
 
+
         //set min values for everything
         double driveThreshold = .15;
         double spinThreshold = .22;
+
 
         if (Math.abs(forward) < driveThreshold){
             forward = 0; }
@@ -81,12 +100,14 @@ public class DriveTrain extends SubsystemBase{
             spin = 0; }
         if (Math.abs(sideways) < driveThreshold){
             sideways = 0; }
+    
 
         //blend drive, strafe, and turing
         double leftFront = forward - sideways + spin;
         double leftBack = forward + sideways + spin;
         double rightFront = forward + sideways - spin;
         double rightBack = forward - sideways - spin;
+
 
         //clamp to not exceed 1
         double maxLeftVal = Math.max(leftBack, leftFront);
@@ -98,6 +119,7 @@ public class DriveTrain extends SubsystemBase{
             leftBack/= maxVal;
             rightBack /= maxVal;
             rightFront /= maxVal; }
+
 
         //apply
         m_leftFrontVictor.set(ControlMode.PercentOutput, leftFront);
@@ -117,7 +139,6 @@ public class DriveTrain extends SubsystemBase{
         SmartDashboard.putNumber("BR", m_rightBackVictor.getMotorOutputPercent());
 
         SmartDashboard.putNumber("Angle", m_gyroscope.getAngle());
-       
 
     }
 

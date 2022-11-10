@@ -34,7 +34,15 @@ public class TurnDegree extends CommandBase{
     @Override
     public void execute() {
    
-        m_driveTrain.turnRight(0.5);
+        m_driveTrain.turn(0.5);
+
+    }
+
+
+    @Override
+    public void end(boolean interrupted) {
+        
+        m_driveTrain.stopDriving();
 
     }
 
