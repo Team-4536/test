@@ -65,6 +65,11 @@ public class DriveTrain extends SubsystemBase{
         m_rightFrontVictor.set(ControlMode.PercentOutput, -speed);
         m_rightBackVictor.set(ControlMode.PercentOutput, -speed);
 
+        SmartDashboard.putNumber("FL", m_leftFrontVictor.getMotorOutputPercent());
+        SmartDashboard.putNumber("BL", m_leftBackVictor.getMotorOutputPercent());
+        SmartDashboard.putNumber("FR", m_rightFrontVictor.getMotorOutputPercent());
+        SmartDashboard.putNumber("BR", m_rightBackVictor.getMotorOutputPercent());
+
     }
 
     //method to stop motor output

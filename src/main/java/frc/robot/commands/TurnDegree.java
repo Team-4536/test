@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Gyroscope;
@@ -19,9 +20,9 @@ public class TurnDegree extends CommandBase{
     private final PIDController m_pidController;
 
     //instance PID coefficient values
-    private final double kP = 0.0;
-    private final double kI = 0.0;
-    private final double kD = 0.0;
+    private final double kP = 0.0083;
+    private final double kI = 0.0026;
+    private final double kD = 0.0005;
 
     //gets gyroscope and drivetrain and the angle we want into turndegree
     public TurnDegree(Gyroscope gyroscope, DriveTrain drivetrain, double angle){
@@ -42,6 +43,8 @@ public class TurnDegree extends CommandBase{
       
         m_gyroscope.resetGyroscope();
 
+        m_pidController.reset();
+
     }
 
 
@@ -51,10 +54,16 @@ public class TurnDegree extends CommandBase{
 
         double currentAngle = m_gyroscope.getAngle();
 
-        double PIDspeed = m_pidController.calculate(m_goalAngle - currentAngle);
-        double turnSpeed = Math.max(PIDspeed, currentAngle);
+        double PIDspeed = m_pidController.calculate(currentAngle - m_goalAngle);
+        double turnSpeed = Math.min(PIDspeed, .7);
    
         m_driveTrain.turn(turnSpeed);
+
+        SmartDashboard.putNumber("PID val", PIDspeed);
+        SmartDashboard.putNumber("Turn Motor Output", turnSpeed);
+
+        PIDspeed = 0;
+        turnSpeed = 0;
 
     }
 
