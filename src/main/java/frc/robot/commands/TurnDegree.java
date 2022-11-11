@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
@@ -7,16 +8,26 @@ import frc.robot.subsystems.Gyroscope;
 
 public class TurnDegree extends CommandBase{
 
-    DriveTrain m_driveTrain;
-    Gyroscope m_gyroscope;
-    Double m_goalAngle;
+    private final DriveTrain m_driveTrain;
+    private final Gyroscope m_gyroscope;
+
+    private final double m_goalAngle;
+
+    private final PIDController m_pidController;
+
+    private final double kP = 0.0;
+    private final double kI = 0.0;
+    private final double kD = 0.0;
 
     //gets gyroscope and drivetrain and the angle we want into turndegree
-    public TurnDegree(Gyroscope gyroscope, DriveTrain drivetrain, Double angle){
+    public TurnDegree(Gyroscope gyroscope, DriveTrain drivetrain, double angle){
 
         m_gyroscope = gyroscope;
         m_driveTrain = drivetrain;
+
         m_goalAngle = angle;
+
+        m_pidController = new PIDController(kP, kI, kD);
 
     }
 

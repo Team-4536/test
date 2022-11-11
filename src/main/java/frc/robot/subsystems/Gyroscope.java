@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Gyroscope extends SubsystemBase{
 
-    AHRS m_gyroscope;
+    private final AHRS m_gyroscope;
 
     public Gyroscope(){
 

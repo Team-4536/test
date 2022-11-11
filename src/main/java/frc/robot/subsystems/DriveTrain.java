@@ -11,13 +11,13 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class DriveTrain extends SubsystemBase{
 
     //Victor SPX motor controller instance variables
-    VictorSPX m_leftFrontVictor;
-    VictorSPX m_leftBackVictor;
-    VictorSPX m_rightFrontVictor;
-    VictorSPX m_rightBackVictor;  
+    private final VictorSPX m_leftFrontVictor;
+    private final VictorSPX m_leftBackVictor;
+    private final VictorSPX m_rightFrontVictor;
+    private final VictorSPX m_rightBackVictor;  
 
     //gyroscope instance variable
-    Gyroscope m_gyroscope;
+    private final Gyroscope m_gyroscope;
 
 
     //define instance variables and invert motors where necessary
