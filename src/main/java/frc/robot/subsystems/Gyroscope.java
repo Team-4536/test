@@ -25,6 +25,12 @@ public class Gyroscope extends SubsystemBase{
         m_gyroscope.reset();
 
     }
+
+    public AHRS getAHRS(){
+
+        return m_gyroscope;
+        
+    }
     
     
 }

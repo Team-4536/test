@@ -8,13 +8,17 @@ import frc.robot.subsystems.Gyroscope;
 
 public class TurnDegree extends CommandBase{
 
+    //instance subystmes
     private final DriveTrain m_driveTrain;
     private final Gyroscope m_gyroscope;
 
+    //instance double for goal angle
     private final double m_goalAngle;
 
+    //instance PID controller
     private final PIDController m_pidController;
 
+    //instance PID coefficient values
     private final double kP = 0.0;
     private final double kI = 0.0;
     private final double kD = 0.0;
@@ -44,8 +48,13 @@ public class TurnDegree extends CommandBase{
     //turn the robot when command is being executed
     @Override
     public void execute() {
+
+        double currentAngle = m_gyroscope.getAngle();
+
+        double PIDspeed = m_pidController.calculate(m_goalAngle - currentAngle);
+        double turnSpeed = Math.max(PIDspeed, currentAngle);
    
-        m_driveTrain.turn(0.5);
+        m_driveTrain.turn(turnSpeed);
 
     }
 
