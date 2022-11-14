@@ -46,6 +46,19 @@ public class DriveTrain extends SubsystemBase{
         
     }
 
+
+    public Encoder getLeftEncoder(){
+
+        return m_leftEncoder;
+
+    }
+
+    public Encoder getRightEncoder(){
+
+        return m_rightEncoder;
+        
+    }
+
     //method to drive moving all wheels in the same direciton
     public void DriveInput(double speed){
 
@@ -148,6 +161,9 @@ public class DriveTrain extends SubsystemBase{
         SmartDashboard.putNumber("BL", m_leftBackVictor.getMotorOutputPercent());
         SmartDashboard.putNumber("FR", m_rightFrontVictor.getMotorOutputPercent());
         SmartDashboard.putNumber("BR", m_rightBackVictor.getMotorOutputPercent());
+
+        SmartDashboard.putNumber("Left Encoder Ticks", m_leftEncoder.get());
+        SmartDashboard.putNumber("Right Encoder Ticks", m_rightEncoder.get());
 
         SmartDashboard.putNumber("Angle", m_gyroscope.getAngle());
 
