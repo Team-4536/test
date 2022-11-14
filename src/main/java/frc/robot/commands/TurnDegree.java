@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -18,11 +19,14 @@ public class TurnDegree extends CommandBase{
 
     //instance PID controller
     private final PIDController m_pidController;
-
+    private final Timer m_funnyTimer;
+ 
     //instance PID coefficient values
     private final double kP = 0.0083;
     private final double kI = 0.0026;
     private final double kD = 0.0005;
+
+    
 
     //gets gyroscope and drivetrain and the angle we want into turndegree
     public TurnDegree(Gyroscope gyroscope, DriveTrain drivetrain, double angle){
@@ -34,6 +38,8 @@ public class TurnDegree extends CommandBase{
 
         m_pidController = new PIDController(kP, kI, kD);
 
+        m_funnyTimer = new Timer();
+
     }
 
 
@@ -44,6 +50,9 @@ public class TurnDegree extends CommandBase{
         m_gyroscope.resetGyroscope();
 
         m_pidController.reset();
+
+        m_funnyTimer.reset();
+        m_funnyTimer.start();
 
     }
 
@@ -82,7 +91,7 @@ public class TurnDegree extends CommandBase{
     public boolean isFinished() {
         
         //stop the robot once the goal angle is achieved
-        return (m_gyroscope.getAngle() >= m_goalAngle);
+        return (m_gyroscope.getAngle() >= m_goalAngle) && (m_funnyTimer.get() >= 4);
 
     }
     

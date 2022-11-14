@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -19,6 +20,11 @@ public class DriveTrain extends SubsystemBase{
     //gyroscope instance variable
     private final Gyroscope m_gyroscope;
 
+    //encoder instance variables
+    private final Encoder m_leftEncoder;
+    private final Encoder m_rightEncoder;
+    
+
 
     //define instance variables and invert motors where necessary
     public DriveTrain(Gyroscope gyr0scop3){
@@ -34,6 +40,9 @@ public class DriveTrain extends SubsystemBase{
         m_rightFrontVictor.setInverted(true);
 
         m_gyroscope = gyr0scop3;
+
+        m_leftEncoder = new Encoder(2, 3, false, null);
+        m_rightEncoder = new Encoder(0, 1, false, null);
         
     }
 
