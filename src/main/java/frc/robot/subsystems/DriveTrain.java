@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -41,12 +42,13 @@ public class DriveTrain extends SubsystemBase{
 
         m_gyroscope = gyr0scop3;
 
-        m_leftEncoder = new Encoder(2, 3, false, null);
-        m_rightEncoder = new Encoder(0, 1, false, null);
+        m_leftEncoder = new Encoder(2, 3, false, EncodingType.k2X);
+        m_rightEncoder = new Encoder(0, 1, false, EncodingType.k2X);
         
     }
 
 
+    //methods to get encoders in other files
     public Encoder getLeftEncoder(){
 
         return m_leftEncoder;
@@ -56,7 +58,16 @@ public class DriveTrain extends SubsystemBase{
     public Encoder getRightEncoder(){
 
         return m_rightEncoder;
-        
+
+    }
+
+
+    //methods to reset encoders
+    public void resetEncoders(){
+
+        m_leftEncoder.reset();
+        m_rightEncoder.reset();
+
     }
 
     //method to drive moving all wheels in the same direciton
