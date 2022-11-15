@@ -24,6 +24,7 @@ public class RobotContainer {
   //joysticks and related objects instances
   private final Joystick m_joystick;
   private final JoystickButton m_turnButton;
+  private final JoystickButton m_resetEncoderButton;
 
   //command instances
   private final TurnDegree m_turnDegree;
@@ -38,6 +39,7 @@ public class RobotContainer {
     m_joystick = new Joystick(0);
 
     m_turnButton = new JoystickButton(m_joystick, 3);
+    m_resetEncoderButton = new JoystickButton(m_joystick, 1);
 
     m_turnDegree = new TurnDegree(m_gyroscope, m_driveTrain, 90.0);
 
@@ -51,6 +53,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
     m_turnButton.whenPressed(m_turnDegree);
+    m_resetEncoderButton.whenPressed(new RunCommand(()-> m_driveTrain.resetEncoders(), m_driveTrain));
 
   }
 
