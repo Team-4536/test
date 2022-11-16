@@ -16,6 +16,11 @@ public final class Constants {
 
     public final static class DriveInfo{
 
+        public final static int ENCODER_TICKS_PER_ROTATION = 360;
+
+        public final static double MECANUM_WHEEL_CIRCUMFERENCE_IN_INCHES = 19.0;
+        public final static double MECANUM_WHEEL_DIAMETER_IN_INCHES = MECANUM_WHEEL_CIRCUMFERENCE_IN_INCHES/Math.PI;
+
 
     }
 }

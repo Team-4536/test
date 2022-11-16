@@ -43,7 +43,7 @@ public class DriveTrain extends SubsystemBase{
         m_gyroscope = gyr0scop3;
 
         m_leftEncoder = new Encoder(2, 3, false, EncodingType.k2X);
-        m_rightEncoder = new Encoder(0, 1, false, EncodingType.k2X);
+        m_rightEncoder = new Encoder(0, 1, true, EncodingType.k2X);
         
     }
 

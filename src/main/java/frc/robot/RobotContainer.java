@@ -39,7 +39,7 @@ public class RobotContainer {
     m_joystick = new Joystick(0);
 
     m_turnButton = new JoystickButton(m_joystick, 3);
-    m_resetEncoderButton = new JoystickButton(m_joystick, 1);
+    m_resetEncoderButton = new JoystickButton(m_joystick, 5);
 
     m_turnDegree = new TurnDegree(m_gyroscope, m_driveTrain, 90.0);
 
@@ -53,7 +53,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
     m_turnButton.whenPressed(m_turnDegree);
-    m_resetEncoderButton.whenPressed(new RunCommand(()-> m_driveTrain.resetEncoders(), m_driveTrain));
+    m_resetEncoderButton.whenPressed(new RunCommand(()-> m_driveTrain.resetEncoders(), m_driveTrain).withTimeout(.01));
 
   }
 
