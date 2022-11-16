@@ -37,10 +37,10 @@ public class DriveTrain extends SubsystemBase{
         m_rightFrontVictor = new VictorSPX(Constants.DriveInfo.RIGHT_FRONT_DRIVE_MOTOR_ID);
         m_rightBackVictor = new VictorSPX(Constants.DriveInfo.RIGHT_REAR_DRIVE_MOTOR_ID);
 
-        m_leftFrontVictor.setInverted(false);
-        m_leftBackVictor.setInverted(false);
-        m_rightBackVictor.setInverted(true);
-        m_rightFrontVictor.setInverted(true);
+        m_leftFrontVictor.setInverted(Constants.DriveInfo.LEFT_DRIVE_MOTORS_ARE_INVERTED);
+        m_leftBackVictor.setInverted(Constants.DriveInfo.LEFT_DRIVE_MOTORS_ARE_INVERTED);
+        m_rightBackVictor.setInverted(Constants.DriveInfo.RIGHT_DRIVE_MOTORS_ARE_INVERTED);
+        m_rightFrontVictor.setInverted(Constants.DriveInfo.RIGHT_DRIVE_MOTORS_ARE_INVERTED);
 
         m_gyroscope = gyr0scop3;
 

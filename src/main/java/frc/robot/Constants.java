@@ -19,6 +19,7 @@ public final class Constants {
 
     public final static class DriveInfo{
 
+    //physical wheel constant values
     public final static int ENCODER_TICKS_PER_ROTATION = 360;
 
     public final static double MECANUM_WHEEL_CIRCUMFERENCE_IN_INCHES = 19.0;
@@ -29,10 +30,9 @@ public final class Constants {
     public static final int LEFT_REAR_DRIVE_MOTOR_ID = 3;
     public static final int RIGHT_FRONT_DRIVE_MOTOR_ID = 1;
     public static final int RIGHT_REAR_DRIVE_MOTOR_ID = 2;
-   // public static final MotorType DRIVE_MOTOR_BRUSHED_TYPE = MotorType.kBrushed;
 
-    //public static final boolean LEFT_DRIVE_MOTORS_ARE_INVERTED = true;
-    //public static final boolean RIGHT_DRIVE_MOTORS_ARE_INVERTED = false;
+    public static final boolean LEFT_DRIVE_MOTORS_ARE_INVERTED = false;
+    public static final boolean RIGHT_DRIVE_MOTORS_ARE_INVERTED = true;
 
     //public static final double DIFFERENTIAL_DRIVE_DEADBAND = 0.4;
 
