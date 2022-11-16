@@ -7,6 +7,8 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
+import frc.robot.Constants.DriveInfo;
 
 
 
@@ -30,10 +32,18 @@ public class DriveTrain extends SubsystemBase{
     //define instance variables and invert motors where necessary
     public DriveTrain(Gyroscope gyr0scop3){
 
-        m_leftFrontVictor = new VictorSPX(0);
-        m_leftBackVictor = new VictorSPX(3);
-        m_rightFrontVictor = new VictorSPX(1);
-        m_rightBackVictor = new VictorSPX(2);
+        //motors assigned port values
+
+        m_leftFrontVictor = new VictorSPX(Constants.DriveInfo.LEFT_FRONT_DRIVE_MOTOR_ID);
+        m_leftBackVictor = new VictorSPX(Constants.DriveInfo.LEFT_REAR_DRIVE_MOTOR_ID);
+        m_rightFrontVictor = new VictorSPX(Constants.DriveInfo.RIGHT_FRONT_DRIVE_MOTOR_ID);
+        m_rightBackVictor = new VictorSPX(Constants.DriveInfo.RIGHT_REAR_DRIVE_MOTOR_ID);
+    
+
+        m_encoderLF = new Encoder(Constants.DriveInfo.RIGHT_DRIVE_ENCODER_CHANNEL_A,
+        Constants.DriveInfo.RIGHT_DRIVE_ENCODER_CHANNEL_B, 
+        Constants.DriveInfo.RIGHT_DRIVE_ENCODER_IS_INVERTED, 
+        Constants.DriveInfo.DRIVE_MOTOR_ENCODER_ENCODINGTYPE); 
 
         m_leftFrontVictor.setInverted(false);
         m_leftBackVictor.setInverted(false);
