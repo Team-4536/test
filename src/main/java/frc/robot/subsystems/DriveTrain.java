@@ -38,12 +38,6 @@ public class DriveTrain extends SubsystemBase{
         m_leftBackVictor = new VictorSPX(Constants.DriveInfo.LEFT_REAR_DRIVE_MOTOR_ID);
         m_rightFrontVictor = new VictorSPX(Constants.DriveInfo.RIGHT_FRONT_DRIVE_MOTOR_ID);
         m_rightBackVictor = new VictorSPX(Constants.DriveInfo.RIGHT_REAR_DRIVE_MOTOR_ID);
-    
-
-        m_encoderLF = new Encoder(Constants.DriveInfo.RIGHT_DRIVE_ENCODER_CHANNEL_A,
-        Constants.DriveInfo.RIGHT_DRIVE_ENCODER_CHANNEL_B, 
-        Constants.DriveInfo.RIGHT_DRIVE_ENCODER_IS_INVERTED, 
-        Constants.DriveInfo.DRIVE_MOTOR_ENCODER_ENCODINGTYPE); 
 
         m_leftFrontVictor.setInverted(false);
         m_leftBackVictor.setInverted(false);
@@ -185,6 +179,9 @@ public class DriveTrain extends SubsystemBase{
 
         SmartDashboard.putNumber("Left Encoder Ticks", m_leftEncoder.get());
         SmartDashboard.putNumber("Right Encoder Ticks", m_rightEncoder.get());
+
+        //SmartDashboard.putNumber("Inches Gone Left", (((double)m_leftEncoder.get())/360)*19);
+        //SmartDashboard.putNumber("Inches Gone Right", (((double)m_rightEncoder.get())/360)*19);
 
         SmartDashboard.putNumber("Angle", m_gyroscope.getAngle());
 
