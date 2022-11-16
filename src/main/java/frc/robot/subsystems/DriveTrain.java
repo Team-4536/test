@@ -26,8 +26,6 @@ public class DriveTrain extends SubsystemBase{
     //encoder instance variables
     private final Encoder m_leftEncoder;
     private final Encoder m_rightEncoder;
-    
-
 
     //define instance variables and invert motors where necessary
     public DriveTrain(Gyroscope gyr0scop3){
