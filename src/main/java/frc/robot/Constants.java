@@ -14,8 +14,15 @@ import edu.wpi.first.wpilibj.CounterBase.EncodingType;
  * <p>It is advised to statically import this class (or one of its inner classes) wherever the
  * constants are needed, to reduce verbosity.
  */
-public final class Constants {  
-    public static final class DriveInfo {
+ 
+public final class Constants {
+
+    public final static class DriveInfo{
+
+        public final static int ENCODER_TICKS_PER_ROTATION = 360;
+
+        public final static double MECANUM_WHEEL_CIRCUMFERENCE_IN_INCHES = 19.0;
+        public final static double MECANUM_WHEEL_DIAMETER_IN_INCHES = MECANUM_WHEEL_CIRCUMFERENCE_IN_INCHES/Math.PI;
 
     // motor port value constants
     public static final int LEFT_FRONT_DRIVE_MOTOR_ID = 0;

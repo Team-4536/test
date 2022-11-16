@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Gyroscope extends SubsystemBase{
 
-    AHRS m_gyroscope;
+    private final AHRS m_gyroscope;
 
     public Gyroscope(){
 
@@ -14,10 +14,22 @@ public class Gyroscope extends SubsystemBase{
 
     }   
 
-    public double GetAngle(){
+    public double getAngle(){
 
-        return m_gyroscope.getAngle();
+        return m_gyroscope.getAngle()%360;
 
+    }
+
+    public void resetGyroscope(){
+
+        m_gyroscope.reset();
+
+    }
+
+    public AHRS getAHRS(){
+
+        return m_gyroscope;
+        
     }
     
     

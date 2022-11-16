@@ -7,64 +7,70 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.commands.TurnDegree;
 import frc.robot.subsystems.Gyroscope;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
-/**
- * This class is where the bulk of the robot should be declared. Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
- * subsystems, commands, and button mappings) should be declared here.
- */
+
 public class RobotContainer {
-  // The robot's subsystems and commands are defined here...
 
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  //subsystem instances
+  private final Gyroscope m_gyroscope;
+  private final DriveTrain m_driveTrain;
 
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-
-  private final Gyroscope m_gyroscope = new Gyroscope();
-  private final DriveTrain m_driveTrain = new DriveTrain(m_gyroscope);
-
+  //joysticks and related objects instances
   private final Joystick m_joystick;
+  private final JoystickButton m_turnButton;
+  private final JoystickButton m_resetEncoderButton;
+
+  //command instances
+  private final TurnDegree m_turnDegree;
 
 
-
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
+  //define instance variables and run methods to set button commands and default commands
   public RobotContainer() {
+
+    m_gyroscope = new Gyroscope();
+    m_driveTrain = new DriveTrain(m_gyroscope);
     
     m_joystick = new Joystick(0);
 
+    m_turnButton = new JoystickButton(m_joystick, 3);
+    m_resetEncoderButton = new JoystickButton(m_joystick, 5);
+
+    m_turnDegree = new TurnDegree(m_gyroscope, m_driveTrain, 90.0);
+
     configureButtonBindings();
     setDefaultCommands();
+
   }
 
-  /**
-   * Use this method to define your button->command mappings. Buttons can be created by
-   * instantiating a {@link GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
-   * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
-   */
-  private void configureButtonBindings() {}
+  
+  //method to give the buttons command outputs
+  private void configureButtonBindings() {
+
+    m_turnButton.whenPressed(m_turnDegree);
+    m_resetEncoderButton.whenPressed(new RunCommand(()-> m_driveTrain.resetEncoders(), m_driveTrain).withTimeout(.01));
+
+  }
 
 
+  //method to set default commands on subsystems of the robot
   private void setDefaultCommands(){
 
     m_driveTrain.setDefaultCommand(new RunCommand(()-> m_driveTrain.cartesianDrive(m_joystick.getY(), m_joystick.getX(), m_joystick.getZ()), m_driveTrain));
 
   }
 
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
+  
+  //method to set a command to be scheduled during the autonomous period
   public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    
+    return null;
+
   }
+
 }
