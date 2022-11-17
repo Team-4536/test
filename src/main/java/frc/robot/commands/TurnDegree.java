@@ -26,7 +26,6 @@ public class TurnDegree extends CommandBase{
     private final double kI = 0.0026;
     private final double kD = 0.0005;
 
-    
 
     //gets gyroscope and drivetrain and the angle we want into turndegree
     public TurnDegree(Gyroscope gyroscope, DriveTrain drivetrain, double angle){

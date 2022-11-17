@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 
 /**
@@ -17,13 +18,25 @@ import edu.wpi.first.wpilibj.CounterBase.EncodingType;
  
 public final class Constants {
 
-    public final static class DriveInfo{
+    public static final class DriveInfo{
 
     //physical wheel constant values
-    public final static int ENCODER_TICKS_PER_ROTATION = 360;
+    public static final int ENCODER_TICKS_PER_ROTATION = 360;
 
-    public final static double MECANUM_WHEEL_CIRCUMFERENCE_IN_INCHES = 19.0;
-    public final static double MECANUM_WHEEL_DIAMETER_IN_INCHES = MECANUM_WHEEL_CIRCUMFERENCE_IN_INCHES/Math.PI;
+    public static final double MECANUM_WHEEL_CIRCUMFERENCE_IN_INCHES = 19.0;
+    public static final double MECANUM_WHEEL_DIAMETER_IN_INCHES = MECANUM_WHEEL_CIRCUMFERENCE_IN_INCHES/Math.PI;
+
+
+    //drive input dampening coefficients
+    public static final double MOTOR_OUTPUT_Y_COEFFICIENT = .75;
+    public static final double MOTOR_OUTPUT_X_COEFFICIENT = 1;
+    public static final double MOTOR_OUTPUT_Z_COEFFICIENT = .6;
+
+    
+    //drive input deadzone values
+    public static final double DRIVE_MOTOR_DEADZONE = .15;
+    public static final double SPIN_MOTOR_DEADZONE = .22;
+
 
     // motor port value constants
     public static final int LEFT_FRONT_DRIVE_MOTOR_ID = 0;
@@ -34,24 +47,35 @@ public final class Constants {
     public static final boolean LEFT_DRIVE_MOTORS_ARE_INVERTED = false;
     public static final boolean RIGHT_DRIVE_MOTORS_ARE_INVERTED = true;
 
-    //public static final double DIFFERENTIAL_DRIVE_DEADBAND = 0.4;
+    //encoder port values
+    public static final int LEFT_DRIVE_ENCODER_CHANNEL_A = 2;
+    public static final int LEFT_DRIVE_ENCODER_CHANNEL_B = 3;
+    public static final int RIGHT_DRIVE_ENCODER_CHANNEL_A = 0;
+    public static final int RIGHT_DRIVE_ENCODER_CHANNEL_B = 1;
 
-    //encoder port values (?)
+    public static final boolean LEFT_DRIVE_ENCODER_IS_INVERTED = false;
+    public static final boolean RIGHT_DRIVE_ENCODER_IS_INVERTED = true;
 
-    public static final int LEFT_DRIVE_ENCODER_CHANNEL_A = 0;
-    public static final int LEFT_DRIVE_ENCODER_CHANNEL_B = 1;
-    public static final int RIGHT_DRIVE_ENCODER_CHANNEL_A = 2;
-    public static final int RIGHT_DRIVE_ENCODER_CHANNEL_B = 3;
-    public static final boolean RIGHT_DRIVE_ENCODER_IS_INVERTED = false;
-    public static final EncodingType DRIVE_MOTOR_ENCODER_ENCODINGTYPE = null;
+    public static final EncodingType DRIVE_MOTOR_ENCODER_ENCODINGTYPE = EncodingType.k2X;
 
-    //public static final EncodingType DRIVE_MOTOR_ENCODER_ENCODINGTYPE = EncodingType.k2X;
+    }
 
-    //public static final boolean LEFT_DRIVE_ENCODER_IS_INVERTED = false;
-    //public static final boolean RIGHT_DRIVE_ENCODER_IS_INVERTED = true;
+    public static final class PneumaticInfo{
 
-    //public static final boolean SHOW_DRIVETRAIN_IN_DASHBOARD = true;
+    //solenoid channel ids
+    public static final int PNEUMATIC_ARM_FORWARD_CHANNEL_ID = 1;
+    public static final int PNEUMATIC_ARM_REVERSE_CHANNEL_ID = 0;
 
-   // public static final double SET_MAX_RATE = 0.5;
-}
+    //pneumatics module type
+    public static final PneumaticsModuleType PNEUMATIC_MODULE_TYPE = PneumaticsModuleType.CTREPCM;
+
+
+    }
+
+    public static final class ControllerInfo{
+
+    public static final int JOYSTICK_PORT_ID = 0;
+
+    }
+
 }

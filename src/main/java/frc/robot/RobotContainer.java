@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.Constants.ControllerInfo;
 import frc.robot.commands.TurnDegree;
 import frc.robot.subsystems.Gyroscope;
 import frc.robot.subsystems.DriveTrain;
@@ -36,7 +37,7 @@ public class RobotContainer {
     m_gyroscope = new Gyroscope();
     m_driveTrain = new DriveTrain(m_gyroscope);
     
-    m_joystick = new Joystick(0);
+    m_joystick = new Joystick(ControllerInfo.JOYSTICK_PORT_ID);
 
     m_turnButton = new JoystickButton(m_joystick, 3);
     m_resetEncoderButton = new JoystickButton(m_joystick, 5);
