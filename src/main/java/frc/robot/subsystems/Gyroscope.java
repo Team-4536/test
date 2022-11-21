@@ -16,7 +16,16 @@ public class Gyroscope extends SubsystemBase{
 
     public double getAngle(){
 
-        return m_gyroscope.getAngle()%360;
+        if (m_gyroscope.getAngle() > 0){
+
+            return m_gyroscope.getAngle()%360;
+
+        }
+        else{
+            
+            return m_gyroscope.getAngle()%360;
+
+        }
 
     }
 
