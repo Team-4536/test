@@ -4,9 +4,7 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.TurnDegree;
 import frc.robot.subsystems.Gyroscope;
 import frc.robot.subsystems.DriveTrain;
