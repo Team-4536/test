@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.DriveTrain;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
@@ -28,18 +29,25 @@ public class DriveForward extends CommandBase {
     @Override
     public void execute() {
 
-       m_driveTrain.DriveInput(1);
+       m_driveTrain.driveUniform(0.1f);
     }
 
     // Called once the command ends or is interrupted.
     @Override
-    public void end(boolean interrupted) {}
+    public void end(boolean interrupted) {
+        m_driveTrain.driveUniform(0);
+    }
 
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return false;
-       //S int encoderLF = m_driveTrain.m_leftFrontVictor.encode
-        
+
+        Encoder awesomeLeftEncoder = m_driveTrain.getLeftEncoder();
+        int leftEncoderValue = awesomeLeftEncoder.get();
+
+        double rotationsGone = leftEncoderValue/360.0;
+        double distanceTraveled = 19.0 * rotationsGone;
+
+        return distanceTraveled > 24.0;
     }
 }

@@ -75,7 +75,7 @@ public class DriveTrain extends SubsystemBase{
     }
 
     //method to drive moving all wheels in the same direciton
-    public void DriveInput(double speed){
+    public void driveUniform(double speed){
 
         m_leftBackVictor.set(ControlMode.PercentOutput, speed);
         m_leftFrontVictor.set(ControlMode.PercentOutput, speed);
