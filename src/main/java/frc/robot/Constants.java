@@ -20,6 +20,9 @@ public final class Constants {
 
     public static final class DriveInfo{
 
+    //base drive values
+    public static final double BASE_DRIVE_VALUE = .7;
+
     //physical wheel constant values
     public static final int ENCODER_TICKS_PER_ROTATION = 360;
 

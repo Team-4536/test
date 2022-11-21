@@ -31,5 +31,11 @@ public class PneumaticArm extends SubsystemBase {
 
      }
 
+     public void TurnOff(){
+
+      m_solenoid.set(DoubleSolenoid.Value.kOff);
+      
+     }
+
     
 }
