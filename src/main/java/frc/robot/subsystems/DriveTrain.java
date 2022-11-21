@@ -26,8 +26,6 @@ public class DriveTrain extends SubsystemBase{
     //encoder instance variables
     private final Encoder m_leftEncoder;
     private final Encoder m_rightEncoder;
-    
-
 
     //define instance variables and invert motors where necessary
     public DriveTrain(Gyroscope gyr0scop3){
@@ -39,15 +37,17 @@ public class DriveTrain extends SubsystemBase{
         m_rightFrontVictor = new VictorSPX(Constants.DriveInfo.RIGHT_FRONT_DRIVE_MOTOR_ID);
         m_rightBackVictor = new VictorSPX(Constants.DriveInfo.RIGHT_REAR_DRIVE_MOTOR_ID);
 
-        m_leftFrontVictor.setInverted(false);
-        m_leftBackVictor.setInverted(false);
-        m_rightBackVictor.setInverted(true);
-        m_rightFrontVictor.setInverted(true);
+        m_leftFrontVictor.setInverted(Constants.DriveInfo.LEFT_DRIVE_MOTORS_ARE_INVERTED);
+        m_leftBackVictor.setInverted(Constants.DriveInfo.LEFT_DRIVE_MOTORS_ARE_INVERTED);
+        m_rightBackVictor.setInverted(Constants.DriveInfo.RIGHT_DRIVE_MOTORS_ARE_INVERTED);
+        m_rightFrontVictor.setInverted(Constants.DriveInfo.RIGHT_DRIVE_MOTORS_ARE_INVERTED);
 
         m_gyroscope = gyr0scop3;
 
-        m_leftEncoder = new Encoder(2, 3, false, EncodingType.k2X);
-        m_rightEncoder = new Encoder(0, 1, true, EncodingType.k2X);
+        m_leftEncoder = new Encoder(DriveInfo.LEFT_DRIVE_ENCODER_CHANNEL_A, DriveInfo.LEFT_DRIVE_ENCODER_CHANNEL_B, 
+                                    DriveInfo.LEFT_DRIVE_ENCODER_IS_INVERTED, DriveInfo.DRIVE_MOTOR_ENCODER_ENCODINGTYPE);
+        m_rightEncoder = new Encoder(DriveInfo.RIGHT_DRIVE_ENCODER_CHANNEL_A, DriveInfo.RIGHT_DRIVE_ENCODER_CHANNEL_B, 
+                                    DriveInfo.RIGHT_DRIVE_ENCODER_IS_INVERTED, DriveInfo.DRIVE_MOTOR_ENCODER_ENCODINGTYPE);
         
     }
 
@@ -123,14 +123,14 @@ public class DriveTrain extends SubsystemBase{
     public void cartesianDrive (double forward, double sideways, double spin){
 
         //damp drive values
-        forward *= .75;
-        spin *= .6;
-        sideways *= 1;
+        forward *= DriveInfo.MOTOR_OUTPUT_Y_COEFFICIENT;
+        spin *= DriveInfo.MOTOR_OUTPUT_Z_COEFFICIENT;
+        sideways *= DriveInfo.MOTOR_OUTPUT_X_COEFFICIENT;
 
 
         //set min values for everything
-        double driveThreshold = .15;
-        double spinThreshold = .22;
+        double driveThreshold = DriveInfo.DRIVE_MOTOR_DEADZONE;
+        double spinThreshold = DriveInfo.SPIN_MOTOR_DEADZONE;
 
 
         if (Math.abs(forward) < driveThreshold){
