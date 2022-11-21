@@ -16,6 +16,8 @@ public class ExtendGrabber extends CommandBase{
     @Override
     public void initialize() {}
 
+
+    //extend pneumatic when command is executed
     @Override
     public void execute() {
         
@@ -23,6 +25,7 @@ public class ExtendGrabber extends CommandBase{
 
     }
 
+    // stop pneumatic when command is done
     @Override
     public void end(boolean interrupted) {
         

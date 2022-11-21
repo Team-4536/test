@@ -31,6 +31,7 @@ public class RobotContainer {
   private final JoystickButton m_turnButton;
   private final JoystickButton m_resetEncoderButton;
 
+  //grabber buttons
   private final JoystickButton m_grabberExtendButton;
   private final JoystickButton m_grabberRetractButton;
 

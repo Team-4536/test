@@ -16,6 +16,7 @@ public class RetractGrabber extends CommandBase{
     @Override
     public void initialize() {}
 
+    //retracts arm when command is run
     @Override
     public void execute() {
         
@@ -23,6 +24,7 @@ public class RetractGrabber extends CommandBase{
 
     }
 
+    //turns off grabber when command is run
     @Override
     public void end(boolean interrupted) {
         
