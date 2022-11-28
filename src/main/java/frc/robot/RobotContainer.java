@@ -58,7 +58,7 @@ public class RobotContainer {
 
     m_turnButton = new JoystickButton(m_joystick, 3);
     m_resetEncoderButton = new JoystickButton(m_joystick, 5);
-    m_grabberExtendButton = new JoystickButton(m_joystick, 0);
+    m_grabberExtendButton = new JoystickButton(m_joystick, 4);
     m_grabberRetractButton = new JoystickButton(m_joystick, 2);
     m_grabberLiftButton = new JoystickButton(m_joystick, 8);
 

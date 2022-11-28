@@ -66,8 +66,8 @@ public final class Constants {
     public static final class PneumaticInfo{
 
     //solenoid channel ids
-    public static final int PNEUMATIC_ARM_FORWARD_CHANNEL_ID = 1;
-    public static final int PNEUMATIC_ARM_REVERSE_CHANNEL_ID = 0;
+    public static final int PNEUMATIC_ARM_FORWARD_CHANNEL_ID = 6;
+    public static final int PNEUMATIC_ARM_REVERSE_CHANNEL_ID = 7;
 
     //pneumatics module type
     public static final PneumaticsModuleType PNEUMATIC_MODULE_TYPE = PneumaticsModuleType.CTREPCM;
