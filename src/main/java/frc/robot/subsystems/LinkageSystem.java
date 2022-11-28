@@ -11,8 +11,14 @@ public class LinkageSystem extends SubsystemBase{
 
     public LinkageSystem(){
 
-        m_linkageMotor = new CANSparkMax(0, MotorType.kBrushed);
+        m_linkageMotor = new CANSparkMax(3, MotorType.kBrushed);
         
+    }
+
+    public void runX(Double gavrielpappas){
+
+       m_linkageMotor.set(gavrielpappas);
+
     }
     
 }
