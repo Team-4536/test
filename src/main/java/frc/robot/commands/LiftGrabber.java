@@ -26,7 +26,7 @@ public class LiftGrabber extends CommandBase {
     @Override
     public void execute() {
         
-        m_linkageSystem.runX(1.0);
+        m_linkageSystem.runX(.7);
 
     }
 
