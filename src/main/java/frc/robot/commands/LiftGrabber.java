@@ -20,12 +20,18 @@ public class LiftGrabber extends CommandBase {
         m_pid = new PIDController(1.0, 1.0, 1.0);
         m_goalPos = 2.3;
         m_currentPos = 3.14;
+
     }
 
     @Override
     public void execute() {
         
-        m_linkageSystem.runX(3.14159265358979323846264338-3);
+        m_linkageSystem.runX(1.0);
 
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        m_linkageSystem.runX(0.0);
     }
 }

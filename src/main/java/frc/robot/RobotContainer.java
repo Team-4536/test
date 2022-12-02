@@ -60,7 +60,7 @@ public class RobotContainer {
     m_resetEncoderButton = new JoystickButton(m_joystick, 5);
     m_grabberExtendButton = new JoystickButton(m_joystick, 4);
     m_grabberRetractButton = new JoystickButton(m_joystick, 2);
-    m_grabberLiftButton = new JoystickButton(m_joystick, 8);
+    m_grabberLiftButton = new JoystickButton(m_joystick, 11);
 
     m_turnDegree = new TurnDegree(m_gyroscope, m_driveTrain, 90.0);
     m_extendGrabber = new ExtendGrabber(m_grabber);
