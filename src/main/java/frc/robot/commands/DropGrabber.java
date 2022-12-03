@@ -26,7 +26,7 @@ public class DropGrabber extends CommandBase {
     @Override
     public void execute() {
         
-        m_linkageSystem.runX(-.7);
+        m_linkageSystem.runX(-.2);
 
     }
 
