@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants.ControllerInfo;
 import frc.robot.commands.DropGrabber;
 import frc.robot.commands.ExtendGrabber;
+import frc.robot.commands.HoldArm;
 import frc.robot.commands.LiftGrabber;
 import frc.robot.commands.RetractGrabber;
 import frc.robot.commands.TurnDegree;
@@ -48,6 +49,7 @@ public class RobotContainer {
 
   private final LiftGrabber m_liftGrabber;
   private final DropGrabber m_dropGrabber;
+  private final HoldArm m_holdArm;
 
   //define instance variables and run methods to set button commands and default commands
   public RobotContainer() {
@@ -72,6 +74,7 @@ public class RobotContainer {
 
     m_liftGrabber = new LiftGrabber(m_linkageSystem);
     m_dropGrabber = new DropGrabber(m_linkageSystem);
+    m_holdArm = new HoldArm(m_linkageSystem);
     
 
     configureButtonBindings();
@@ -98,6 +101,7 @@ public class RobotContainer {
   private void setDefaultCommands(){
 
     m_driveTrain.setDefaultCommand(new RunCommand(()-> m_driveTrain.cartesianDrive(-m_joystick.getY(), -m_joystick.getX(), m_joystick.getZ()), m_driveTrain));
+    //m_linkageSystem.setDefaultCommand(m_holdArm);
 
   }
 

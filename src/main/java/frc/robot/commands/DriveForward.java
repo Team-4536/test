@@ -49,5 +49,6 @@ public class DriveForward extends CommandBase {
         double distanceTraveled = 19.0 * rotationsGone;
 
         return distanceTraveled > 24.0;
+        
     }
 }

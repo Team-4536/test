@@ -18,8 +18,8 @@ public class LiftGrabber extends CommandBase {
         m_linkageSystem = gavrielpappas5;
 
         m_pid = new PIDController(1.0, 1.0, 1.0);
-        m_goalPos = 2.3;
-        m_currentPos = 3.14;
+        m_goalPos = 7;
+        m_currentPos = m_linkageSystem.getEncoderValue();
 
     }
 
@@ -28,10 +28,20 @@ public class LiftGrabber extends CommandBase {
         
         m_linkageSystem.runX(.7);
 
+        m_currentPos = m_linkageSystem.getEncoderValue();
+
     }
 
     @Override
     public void end(boolean interrupted) {
         m_linkageSystem.runX(0.0);
+    
+    }
+
+    @Override
+    public boolean isFinished() {
+
+        return m_currentPos >= m_goalPos;
+    
     }
 }
