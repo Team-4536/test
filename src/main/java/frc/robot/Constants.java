@@ -77,6 +77,12 @@ public final class Constants {
 
     }
 
+    public static final class LinkageInfo{
+
+        public static final double LINKAGE_MIDPOINT_POSITION = 4;
+
+    }
+
     public static final class ControllerInfo{
 
     public static final int JOYSTICK_PORT_ID = 0;

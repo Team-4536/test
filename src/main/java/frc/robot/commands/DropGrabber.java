@@ -2,31 +2,40 @@ package frc.robot.commands;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants.LinkageInfo;
 import frc.robot.subsystems.LinkageSystem;
 
 public class DropGrabber extends CommandBase {
     
-    private final PIDController m_pid;
     //proportional integral derivative
     private final LinkageSystem m_linkageSystem;
     
-    private double m_goalPos;
     private double m_currentPos;
 
-    public DropGrabber(LinkageSystem gavrielpappas5){
+    public DropGrabber(LinkageSystem linkageSystem){
 
-        m_linkageSystem = gavrielpappas5;
+        m_linkageSystem = linkageSystem;
 
-        m_pid = new PIDController(1.0, 1.0, 1.0);
-        m_goalPos = 2.3;
-        m_currentPos = 3.14;
+        m_currentPos = m_linkageSystem.getEncoderValue();
 
     }
 
     @Override
     public void execute() {
+
+        m_currentPos = m_linkageSystem.getEncoderValue();
         
-        m_linkageSystem.runX(-.2);
+        if (m_currentPos >= LinkageInfo.LINKAGE_MIDPOINT_POSITION){
+
+            m_linkageSystem.runX(-.1);
+
+        }
+        else {
+
+            m_linkageSystem.runX(-.3);
+            
+        }
+
 
     }
 
