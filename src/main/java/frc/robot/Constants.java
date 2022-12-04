@@ -81,6 +81,10 @@ public final class Constants {
 
         public static final double LINKAGE_MIDPOINT_POSITION = 4;
 
+        public static final int LINKAGE_MOTOR_ID = 1;
+
+        public static final boolean IS_LINKAGE_MOTOR_INVERTED = true;
+
     }
 
     public static final class ControllerInfo{

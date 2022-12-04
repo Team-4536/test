@@ -26,7 +26,7 @@ public class LiftGrabber extends CommandBase {
     @Override
     public void execute() {
         
-        m_linkageSystem.runX(.7);
+        m_linkageSystem.runX(.8);
 
         m_currentPos = m_linkageSystem.getEncoderValue();
 

@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.LinkageSystem;
 
@@ -26,7 +27,17 @@ public class HoldArm extends CommandBase{
         double currentPos = m_linkageSystem.getEncoderValue();
         double error = m_goalPos - currentPos;
 
-        m_linkageSystem.runX(error/4);
+        m_linkageSystem.runX(error/20);
+
+        boolean dashboard = true;
+
+        if (dashboard){
+
+            SmartDashboard.putNumber("Arm Error", error);
+            SmartDashboard.putNumber("Arm Motor Hold Command", error/20);
+            SmartDashboard.putNumber("Arm Goal Position", m_goalPos);
+            
+        }
         
     }
 

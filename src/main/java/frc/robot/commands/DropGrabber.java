@@ -33,7 +33,7 @@ public class DropGrabber extends CommandBase {
         else {
 
             m_linkageSystem.runX(-.3);
-            
+
         }
 
 
@@ -41,6 +41,8 @@ public class DropGrabber extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
+
         m_linkageSystem.runX(0.0);
+        
     }
 }

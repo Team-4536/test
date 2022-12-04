@@ -11,6 +11,7 @@ import com.revrobotics.SparkMaxRelativeEncoder;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.LinkageInfo;
 
 public class LinkageSystem extends SubsystemBase{
 
@@ -20,10 +21,10 @@ public class LinkageSystem extends SubsystemBase{
 
     public LinkageSystem(){
 
-        m_linkageMotor = new CANSparkMax(1, MotorType.kBrushed);
+        m_linkageMotor = new CANSparkMax(LinkageInfo.LINKAGE_MOTOR_ID, MotorType.kBrushed);
 
         m_encoder = m_linkageMotor.getEncoder(EncoderType.kQuadrature, 8192);
-        m_encoder.setInverted(true);
+        m_encoder.setInverted(LinkageInfo.IS_LINKAGE_MOTOR_INVERTED);
 
     }
 
