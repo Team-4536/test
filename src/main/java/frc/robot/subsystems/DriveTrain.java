@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
+import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -19,6 +20,8 @@ public class DriveTrain extends SubsystemBase{
     private final VictorSPX m_leftBackVictor;
     private final VictorSPX m_rightFrontVictor;
     private final VictorSPX m_rightBackVictor;  
+
+    private final MecanumDrive m_robotDrive;
 
     //gyroscope instance variable
     private final Gyroscope m_gyroscope;
@@ -41,6 +44,8 @@ public class DriveTrain extends SubsystemBase{
         m_leftBackVictor.setInverted(Constants.DriveInfo.LEFT_DRIVE_MOTORS_ARE_INVERTED);
         m_rightBackVictor.setInverted(Constants.DriveInfo.RIGHT_DRIVE_MOTORS_ARE_INVERTED);
         m_rightFrontVictor.setInverted(Constants.DriveInfo.RIGHT_DRIVE_MOTORS_ARE_INVERTED);
+
+        m_robotDrive = null;
 
         m_gyroscope = gyr0scop3;
 
@@ -133,12 +138,40 @@ public class DriveTrain extends SubsystemBase{
         double spinThreshold = DriveInfo.SPIN_MOTOR_DEADZONE;
 
 
+        //give the thing a deadzone effectively
         if (Math.abs(forward) < driveThreshold){
-            forward = 0; }
+            forward = 0;
+        }
+        else if (forward > 0){ 
+            forward = (forward - driveThreshold) * (1/ (1 - driveThreshold));
+        }
+        else{
+            forward = (forward + driveThreshold) * (1/ (1 - driveThreshold));
+        }
+
+
+        // give the thing a deadzone EFFECTIVELY
         if (Math.abs(spin) < spinThreshold){
-            spin = 0; }
+            spin = 0; 
+        }
+        else if (spin > 0){ 
+            spin = (spin - spinThreshold) * (1/ (1 - spinThreshold));
+        }
+        else {
+            spin = (spin + spinThreshold) * (1/ (1 - spinThreshold));
+        }
+
+
+        // EFFECTIVE deadzoning
         if (Math.abs(sideways) < driveThreshold){
-            sideways = 0; }
+            sideways = 0; 
+        }
+        else if (sideways > 0){ 
+            sideways = (sideways - driveThreshold) * (1/ (1 - driveThreshold));
+        }
+        else {
+            sideways = (sideways + driveThreshold) * (1/ (1 - driveThreshold));
+        }
     
 
         //blend drive, strafe, and turing
@@ -151,6 +184,7 @@ public class DriveTrain extends SubsystemBase{
         //clamp to not exceed 1
         double maxLeftVal = Math.max(leftBack, leftFront);
         double maxRightVal = Math.max(rightBack, rightFront);
+
         double maxVal = Math.max(maxRightVal, maxLeftVal);
 
         if (maxVal >= 1){
