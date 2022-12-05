@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.LinkageSystem;
@@ -11,6 +12,8 @@ public class HoldArm extends CommandBase{
     public HoldArm(LinkageSystem linkageSystem){
 
         m_linkageSystem = linkageSystem;
+
+        addRequirements(m_linkageSystem);
 
     }
 

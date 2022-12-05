@@ -101,7 +101,7 @@ public class RobotContainer {
   private void setDefaultCommands(){
 
     m_driveTrain.setDefaultCommand(new RunCommand(()-> m_driveTrain.cartesianDrive(-m_joystick.getY(), -m_joystick.getX(), m_joystick.getZ()), m_driveTrain));
-    //m_linkageSystem.setDefaultCommand(m_holdArm);
+    m_linkageSystem.setDefaultCommand(m_holdArm);
 
   }
 
