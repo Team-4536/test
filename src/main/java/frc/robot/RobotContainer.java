@@ -7,10 +7,12 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants.ControllerInfo;
+import frc.robot.Constants.LinkageInfo;
 import frc.robot.commands.DropGrabber;
 import frc.robot.commands.ExtendGrabber;
 import frc.robot.commands.HoldArm;
 import frc.robot.commands.LiftGrabber;
+import frc.robot.commands.LinkageTo;
 import frc.robot.commands.RetractGrabber;
 import frc.robot.commands.TurnDegree;
 import frc.robot.subsystems.Gyroscope;
@@ -51,6 +53,8 @@ public class RobotContainer {
   private final DropGrabber m_dropGrabber;
   private final HoldArm m_holdArm;
 
+  private final LinkageTo m_linkageTo;
+
   //define instance variables and run methods to set button commands and default commands
   public RobotContainer() {
 
@@ -66,7 +70,7 @@ public class RobotContainer {
     m_grabberExtendButton = new JoystickButton(m_joystick, 4);
     m_grabberRetractButton = new JoystickButton(m_joystick, 2);
     m_grabberLiftButton = new JoystickButton(m_joystick, 11);
-    m_grabberDropButton = new JoystickButton(m_joystick, 12);
+    m_grabberDropButton = new JoystickButton(m_joystick, 9);
 
     m_turnDegree = new TurnDegree(m_gyroscope, m_driveTrain, 90.0);
     m_extendGrabber = new ExtendGrabber(m_grabber);
@@ -75,6 +79,8 @@ public class RobotContainer {
     m_liftGrabber = new LiftGrabber(m_linkageSystem);
     m_dropGrabber = new DropGrabber(m_linkageSystem);
     m_holdArm = new HoldArm(m_linkageSystem);
+
+    m_linkageTo = new LinkageTo(m_linkageSystem, LinkageInfo.LINKAGE_LOW_GOAL);
     
 
     configureButtonBindings();
@@ -90,7 +96,7 @@ public class RobotContainer {
     m_resetEncoderButton.whenPressed(new RunCommand(()-> m_driveTrain.resetEncoders(), m_driveTrain).withTimeout(.01));
 
     m_grabberExtendButton.whenHeld(m_extendGrabber);
-    m_grabberRetractButton.whenHeld(m_retractGrabber);
+    m_grabberRetractButton.whenHeld(m_linkageTo);
     m_grabberLiftButton.whenHeld(m_liftGrabber);
     m_grabberDropButton.whenHeld(m_dropGrabber);
 

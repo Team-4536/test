@@ -27,12 +27,12 @@ public class DropGrabber extends CommandBase {
         
         if (m_currentPos >= LinkageInfo.LINKAGE_MIDPOINT_POSITION){
 
-            m_linkageSystem.runX(-.1);
+            m_linkageSystem.runX(-.25);
 
         }
         else {
 
-            m_linkageSystem.runX(-.3);
+            m_linkageSystem.runX(-.34);
 
         }
 
@@ -43,6 +43,8 @@ public class DropGrabber extends CommandBase {
     public void end(boolean interrupted) {
 
         m_linkageSystem.runX(0.0);
+
+        m_linkageSystem.setGoalPos(m_currentPos);
         
     }
 }

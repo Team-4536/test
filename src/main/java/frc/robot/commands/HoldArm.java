@@ -7,11 +7,13 @@ import frc.robot.subsystems.LinkageSystem;
 
 public class HoldArm extends CommandBase{
     LinkageSystem m_linkageSystem;
-    double m_goalPos = 0.0;
+    double m_goalPos;
 
     public HoldArm(LinkageSystem linkageSystem){
 
         m_linkageSystem = linkageSystem;
+
+        m_goalPos = m_linkageSystem.getEncoderValue();
 
         addRequirements(m_linkageSystem);
 
@@ -20,7 +22,7 @@ public class HoldArm extends CommandBase{
     @Override
     public void initialize() {
 
-        m_goalPos = m_linkageSystem.getEncoderValue();
+       //m_goalPos = m_linkageSystem.getEncoderValue();
 
     }
 
@@ -29,8 +31,9 @@ public class HoldArm extends CommandBase{
 
         double currentPos = m_linkageSystem.getEncoderValue();
         double error = m_goalPos - currentPos;
+        m_goalPos = m_linkageSystem.m_goalPos;
 
-        m_linkageSystem.runX(error/20);
+        m_linkageSystem.runX(error/2);
 
         boolean dashboard = true;
 
