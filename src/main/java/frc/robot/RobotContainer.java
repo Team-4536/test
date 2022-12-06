@@ -6,20 +6,25 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+
 import frc.robot.Constants.ControllerInfo;
+import frc.robot.Constants.LinkageInfo;
 import frc.robot.commands.DropGrabber;
 import frc.robot.commands.ExtendGrabber;
 import frc.robot.commands.HoldArm;
 import frc.robot.commands.LiftGrabber;
+import frc.robot.commands.LinkageTo;
 import frc.robot.commands.RetractGrabber;
 import frc.robot.commands.TurnDegree;
+
+import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Gyroscope;
 import frc.robot.subsystems.LinkageSystem;
 import frc.robot.subsystems.PneumaticArm;
-import frc.robot.subsystems.DriveTrain;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.RunCommand;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 
 public class RobotContainer {
@@ -41,17 +46,27 @@ public class RobotContainer {
   //grabber buttons
   private final JoystickButton m_grabberExtendButton;
   private final JoystickButton m_grabberRetractButton;
+
   private final JoystickButton m_grabberLiftButton;
   private final JoystickButton m_grabberDropButton;
 
+  private final JoystickButton m_grabberToTop;
+  private final JoystickButton m_grabberToMiddle;
+
   //command instances
   private final TurnDegree m_turnDegree;
+
   private final ExtendGrabber m_extendGrabber;
   private final RetractGrabber m_retractGrabber;
 
   private final LiftGrabber m_liftGrabber;
   private final DropGrabber m_dropGrabber;
+
+  private final LinkageTo m_linkageToMiddle;
+  private final LinkageTo m_linkageToTop;
+
   private final HoldArm m_holdArm;
+  
 
   //define instance variables and run methods to set button commands and default commands
   public RobotContainer() {
@@ -71,8 +86,11 @@ public class RobotContainer {
     m_grabberExtendButton = new JoystickButton(m_controller, XboxController.Button.kA.value);
     m_grabberRetractButton = null;
 
-    m_grabberLiftButton = new JoystickButton(m_joystick, 11);
-    m_grabberDropButton = new JoystickButton(m_joystick, XboxController.Button.kX.value);
+    m_grabberLiftButton = new JoystickButton(m_controller, XboxController.Button.kRightBumper.value);
+    m_grabberDropButton = new JoystickButton(m_controller, XboxController.Button.kLeftBumper.value);
+
+    m_grabberToTop = new JoystickButton(m_controller, XboxController.Button.kX.value);
+    m_grabberToMiddle = new JoystickButton(m_controller, XboxController.Button.kY.value);
 
     m_turnDegree = new TurnDegree(m_gyroscope, m_driveTrain, 90.0);
 
@@ -81,6 +99,9 @@ public class RobotContainer {
 
     m_liftGrabber = new LiftGrabber(m_linkageSystem);
     m_dropGrabber = new DropGrabber(m_linkageSystem);
+
+    m_linkageToMiddle = new LinkageTo(m_linkageSystem, LinkageInfo.LOW_PILLAR_POSITION);
+    m_linkageToTop = new LinkageTo(m_linkageSystem, LinkageInfo.HIGH_PILLAR_POSITION);
 
     m_holdArm = new HoldArm(m_linkageSystem);
     
@@ -99,8 +120,12 @@ public class RobotContainer {
 
     m_grabberExtendButton.whenHeld(m_extendGrabber);
     //m_grabberRetractButton.whenHeld(m_retractGrabber);
+
     m_grabberLiftButton.whenHeld(m_liftGrabber);
     m_grabberDropButton.whenHeld(m_dropGrabber);
+
+    m_grabberToMiddle.whenHeld(m_linkageToMiddle);
+    m_grabberToTop.whenActive(m_linkageToTop);
 
   }
 
@@ -109,6 +134,9 @@ public class RobotContainer {
   private void setDefaultCommands(){
 
     m_driveTrain.setDefaultCommand(new RunCommand(()-> m_driveTrain.cartesianDrive(-m_joystick.getY(), -m_joystick.getX(), m_joystick.getZ()), m_driveTrain));
+
+    //m_driveTrain.setDefaultCommand(new RunCommand(()-> m_driveTrain.cartesianDriveWPI(-m_joystick.getY(), -m_joystick.getX(), m_joystick.getZ()), m_driveTrain));
+    //m_driveTrain.setDefaultCommand(new RunCommand(()-> m_driveTrain.cartesianDriveFieldOriented(-m_joystick.getY(), -m_joystick.getX(), m_joystick.getZ(), m_gyroscope.getAngleAbsolute()), m_driveTrain));
     m_linkageSystem.setDefaultCommand(m_holdArm);
 
   }

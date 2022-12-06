@@ -13,7 +13,7 @@ public class LinkageTo extends CommandBase{
     private final double m_goalPosition;
 
     private final PIDController m_pid;
-    private final double kP = 0.0;
+    private final double kP = 0.5;
     private final double kI = 0.0;
     private final double kD = 0.0;
 
@@ -63,6 +63,7 @@ public class LinkageTo extends CommandBase{
     public boolean isFinished() {
         
         return m_linkage.getEncoderValue() >= m_goalPosition;
+
     }
 
     @Override

@@ -85,6 +85,9 @@ public final class Constants {
 
         public static final boolean IS_LINKAGE_MOTOR_INVERTED = true;
 
+        public static final double HIGH_PILLAR_POSITION = 9;
+        public static final double LOW_PILLAR_POSITION = 6.35;
+
     }
 
     public static final class ControllerInfo{

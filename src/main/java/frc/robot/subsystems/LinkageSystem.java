@@ -36,7 +36,7 @@ public class LinkageSystem extends SubsystemBase{
 
        m_linkageMotor.set(speed);
 
-       SmartDashboard.putNumber("Lift Encoder", m_encoder.getPosition());
+       SmartDashboard.putNumber("Lift Encoder Value", m_encoder.getPosition());
        SmartDashboard.putNumber("Spark Motor Output", speed);
 
     }
