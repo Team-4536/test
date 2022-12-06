@@ -23,7 +23,7 @@ public class Gyroscope extends SubsystemBase{
         }
         else{
             
-            return m_gyroscope.getAngle()%360;
+            return ((360 * 50) + m_gyroscope.getAngle())%360;
 
         }
 
