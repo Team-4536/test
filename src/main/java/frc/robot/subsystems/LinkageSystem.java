@@ -19,12 +19,16 @@ public class LinkageSystem extends SubsystemBase{
 
     private final RelativeEncoder m_encoder;
 
+    public double m_goalPos;
+
     public LinkageSystem(){
 
         m_linkageMotor = new CANSparkMax(LinkageInfo.LINKAGE_MOTOR_ID, MotorType.kBrushed);
 
         m_encoder = m_linkageMotor.getEncoder(EncoderType.kQuadrature, 8192);
         m_encoder.setInverted(LinkageInfo.IS_LINKAGE_MOTOR_INVERTED);
+
+        m_goalPos = m_encoder.getPosition();
 
     }
 
@@ -35,9 +39,16 @@ public class LinkageSystem extends SubsystemBase{
        SmartDashboard.putNumber("Lift Encoder", m_encoder.getPosition());
 
     }
+
     public double getEncoderValue(){
 
         return m_encoder.getPosition();
+        
+    }
+
+    public void setGoalPos(double onorato){
+
+        m_goalPos = onorato;
         
     }
     

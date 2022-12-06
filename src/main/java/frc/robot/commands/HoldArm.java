@@ -20,24 +20,25 @@ public class HoldArm extends CommandBase{
     @Override
     public void initialize() {
 
-        m_goalPos = m_linkageSystem.getEncoderValue();
+        m_goalPos = m_linkageSystem.m_goalPos;
 
     }
 
     @Override
     public void execute() {
 
+        m_goalPos = m_linkageSystem.m_goalPos;
         double currentPos = m_linkageSystem.getEncoderValue();
         double error = m_goalPos - currentPos;
 
-        m_linkageSystem.runX(error/20);
+        m_linkageSystem.runX(error/2);
 
         boolean dashboard = true;
 
         if (dashboard){
 
             SmartDashboard.putNumber("Arm Error", error);
-            SmartDashboard.putNumber("Arm Motor Hold Command", error/20);
+            SmartDashboard.putNumber("Arm Motor Hold Command", error/2);
             SmartDashboard.putNumber("Arm Goal Position", m_goalPos);
             
         }

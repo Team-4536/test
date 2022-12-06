@@ -90,7 +90,7 @@ public class TurnDegree extends CommandBase{
     public boolean isFinished() {
         
         //stop the robot once the goal angle is achieved
-        return (m_gyroscope.getAngleSimplified() >= m_goalAngle) && (m_funnyTimer.get() >= 4);
+        return (m_gyroscope.getAngleSimplified() >= m_goalAngle) && (m_funnyTimer.get() >= 2.5);
 
     }
     

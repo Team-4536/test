@@ -34,14 +34,17 @@ public class LiftGrabber extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
+
         m_linkageSystem.runX(0.0);
+
+        m_linkageSystem.setGoalPos(m_linkageSystem.getEncoderValue());
     
     }
 
     @Override
     public boolean isFinished() {
 
-        return m_currentPos >= m_goalPos;
+        return false;
     
     }
 }

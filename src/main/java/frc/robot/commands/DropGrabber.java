@@ -43,6 +43,9 @@ public class DropGrabber extends CommandBase {
     public void end(boolean interrupted) {
 
         m_linkageSystem.runX(0.0);
+
+        m_linkageSystem.setGoalPos(m_linkageSystem.m_goalPos);
         
     }
+    
 }
