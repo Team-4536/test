@@ -6,10 +6,13 @@ import frc.robot.subsystems.PneumaticArm;
 public class ExtendGrabber extends CommandBase{
 
     private final PneumaticArm m_grabber;
+    private boolean m_switch;
 
     public ExtendGrabber(PneumaticArm gr4bber){
 
         m_grabber = gr4bber;
+
+        m_switch = true;
 
     }
 
@@ -21,7 +24,16 @@ public class ExtendGrabber extends CommandBase{
     @Override
     public void execute() {
         
-        m_grabber.ExtendArm();
+        if (m_switch) {
+
+            m_grabber.ExtendArm();
+
+        }
+        else {
+
+            m_grabber.RetractArm();
+
+        }
 
     }
 
@@ -30,6 +42,8 @@ public class ExtendGrabber extends CommandBase{
     public void end(boolean interrupted) {
         
         m_grabber.TurnOff();
+
+        m_switch = !m_switch;
         
     }
     
