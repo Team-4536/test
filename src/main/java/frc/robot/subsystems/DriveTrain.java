@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
@@ -16,10 +17,10 @@ import frc.robot.Constants.DriveInfo;
 public class DriveTrain extends SubsystemBase{
 
     //Victor SPX motor controller instance variables
-    private final VictorSPX m_leftFrontVictor;
-    private final VictorSPX m_leftBackVictor;
-    private final VictorSPX m_rightFrontVictor;
-    private final VictorSPX m_rightBackVictor;  
+    private final WPI_VictorSPX m_leftFrontVictor;
+    private final WPI_VictorSPX m_leftBackVictor;
+    private final WPI_VictorSPX m_rightFrontVictor;
+    private final WPI_VictorSPX m_rightBackVictor;  
 
     private final MecanumDrive m_robotDrive;
 
@@ -35,17 +36,17 @@ public class DriveTrain extends SubsystemBase{
 
         //motors assigned port values
 
-        m_leftFrontVictor = new VictorSPX(Constants.DriveInfo.LEFT_FRONT_DRIVE_MOTOR_ID);
-        m_leftBackVictor = new VictorSPX(Constants.DriveInfo.LEFT_REAR_DRIVE_MOTOR_ID);
-        m_rightFrontVictor = new VictorSPX(Constants.DriveInfo.RIGHT_FRONT_DRIVE_MOTOR_ID);
-        m_rightBackVictor = new VictorSPX(Constants.DriveInfo.RIGHT_REAR_DRIVE_MOTOR_ID);
+        m_leftFrontVictor = new WPI_VictorSPX(Constants.DriveInfo.LEFT_FRONT_DRIVE_MOTOR_ID);
+        m_leftBackVictor = new WPI_VictorSPX(Constants.DriveInfo.LEFT_REAR_DRIVE_MOTOR_ID);
+        m_rightFrontVictor = new WPI_VictorSPX(Constants.DriveInfo.RIGHT_FRONT_DRIVE_MOTOR_ID);
+        m_rightBackVictor = new WPI_VictorSPX(Constants.DriveInfo.RIGHT_REAR_DRIVE_MOTOR_ID);
 
         m_leftFrontVictor.setInverted(Constants.DriveInfo.LEFT_DRIVE_MOTORS_ARE_INVERTED);
         m_leftBackVictor.setInverted(Constants.DriveInfo.LEFT_DRIVE_MOTORS_ARE_INVERTED);
         m_rightBackVictor.setInverted(Constants.DriveInfo.RIGHT_DRIVE_MOTORS_ARE_INVERTED);
         m_rightFrontVictor.setInverted(Constants.DriveInfo.RIGHT_DRIVE_MOTORS_ARE_INVERTED);
 
-        m_robotDrive = null;
+        m_robotDrive = new MecanumDrive(m_leftFrontVictor, m_leftBackVictor, m_rightFrontVictor, m_rightBackVictor);
 
         m_gyroscope = gyr0scop3;
 
@@ -76,6 +77,22 @@ public class DriveTrain extends SubsystemBase{
 
         m_leftEncoder.reset();
         m_rightEncoder.reset();
+
+    }
+
+
+    //method to cartesian drive with the WPILIB methods
+    public void cartesianDriveWPI(double ySpeed, double xSpeed, double zRotation){
+
+        m_robotDrive.driveCartesian(ySpeed, xSpeed, zRotation);
+
+    }
+
+    
+    //method to field oriented drive with the WPILIB methods
+    public void cartesianDriveFieldOriented(double ySpeed, double xSpeed, double zRotation, double gyroAngle){
+
+        m_robotDrive.driveCartesian(ySpeed, xSpeed, zRotation, gyroAngle);
 
     }
 
@@ -217,7 +234,7 @@ public class DriveTrain extends SubsystemBase{
         //SmartDashboard.putNumber("Inches Gone Left", (((double)m_leftEncoder.get())/360)*19);
         //SmartDashboard.putNumber("Inches Gone Right", (((double)m_rightEncoder.get())/360)*19);
 
-        SmartDashboard.putNumber("Angle", m_gyroscope.getAngle());
+        SmartDashboard.putNumber("Angle", m_gyroscope.getAngleSimplified());
 
     }
 

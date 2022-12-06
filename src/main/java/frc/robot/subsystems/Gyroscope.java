@@ -14,7 +14,7 @@ public class Gyroscope extends SubsystemBase{
 
     }   
 
-    public double getAngle(){
+    public double getAngleSimplified(){
 
         if (m_gyroscope.getAngle() > 0){
 
@@ -27,6 +27,13 @@ public class Gyroscope extends SubsystemBase{
 
         }
 
+    }
+
+    
+    public double getAngleAbsolute(){
+
+        return m_gyroscope.getAngle();
+        
     }
 
     public void resetGyroscope(){

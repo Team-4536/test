@@ -60,7 +60,7 @@ public class TurnDegree extends CommandBase{
     @Override
     public void execute() {
 
-        double currentAngle = m_gyroscope.getAngle();
+        double currentAngle = m_gyroscope.getAngleSimplified();
 
         double PIDspeed = m_pidController.calculate(currentAngle - m_goalAngle);
         double turnSpeed = Math.min(PIDspeed, DriveInfo.BASE_DRIVE_VALUE);
@@ -90,7 +90,7 @@ public class TurnDegree extends CommandBase{
     public boolean isFinished() {
         
         //stop the robot once the goal angle is achieved
-        return (m_gyroscope.getAngle() >= m_goalAngle) && (m_funnyTimer.get() >= 4);
+        return (m_gyroscope.getAngleSimplified() >= m_goalAngle) && (m_funnyTimer.get() >= 4);
 
     }
     

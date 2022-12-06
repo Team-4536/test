@@ -19,7 +19,6 @@ public class PneumaticArm extends SubsystemBase {
         m_module = new PneumaticsControlModule(PneumaticInfo.PNEUMATIC_CONTROL_MODULE_ID);
         m_solenoid = m_module.makeDoubleSolenoid(PneumaticInfo.PNEUMATIC_ARM_FORWARD_CHANNEL_ID, PneumaticInfo.PNEUMATIC_ARM_REVERSE_CHANNEL_ID);
 
-
      } 
 
      public void ExtendArm(){
