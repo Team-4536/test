@@ -89,7 +89,11 @@ public final class Constants {
 
     public static final class ControllerInfo{
 
-    public static final int JOYSTICK_PORT_ID = 0;
+        public static final int JOYSTICK_PORT_ID = 0;
+
+        public static final int CONTROLLER_PORT_ID = 1;
+    
+
 
     }
     

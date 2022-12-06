@@ -33,8 +33,10 @@ public class RobotContainer {
   //joysticks and related objects instances
   private final Joystick m_joystick;
 
+  private final XboxController m_controller;
+
   private final JoystickButton m_turnButton;
-  private final JoystickButton m_resetEncoderButton;
+  private final JoystickButton m_resetDriveEncoderButton;
 
   //grabber buttons
   private final JoystickButton m_grabberExtendButton;
@@ -60,20 +62,26 @@ public class RobotContainer {
     m_linkageSystem = new LinkageSystem();
     
     m_joystick = new Joystick(ControllerInfo.JOYSTICK_PORT_ID);
+    m_controller = new XboxController(ControllerInfo.CONTROLLER_PORT_ID);
 
-    m_turnButton = new JoystickButton(m_joystick, 3);
-    m_resetEncoderButton = new JoystickButton(m_joystick, 5);
-    m_grabberExtendButton = new JoystickButton(m_joystick, 4);
-    m_grabberRetractButton = new JoystickButton(m_joystick, 2);
+    m_turnButton = new JoystickButton(m_joystick, 7);
+
+    m_resetDriveEncoderButton = new JoystickButton(m_joystick, 8);
+
+    m_grabberExtendButton = new JoystickButton(m_controller, XboxController.Button.kA.value);
+    m_grabberRetractButton = null;
+
     m_grabberLiftButton = new JoystickButton(m_joystick, 11);
-    m_grabberDropButton = new JoystickButton(m_joystick, 12);
+    m_grabberDropButton = new JoystickButton(m_joystick, XboxController.Button.kX.value);
 
     m_turnDegree = new TurnDegree(m_gyroscope, m_driveTrain, 90.0);
+
     m_extendGrabber = new ExtendGrabber(m_grabber);
     m_retractGrabber = new RetractGrabber(m_grabber);
 
     m_liftGrabber = new LiftGrabber(m_linkageSystem);
     m_dropGrabber = new DropGrabber(m_linkageSystem);
+
     m_holdArm = new HoldArm(m_linkageSystem);
     
 
@@ -87,10 +95,10 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
     m_turnButton.whenPressed(m_turnDegree);
-    m_resetEncoderButton.whenPressed(new RunCommand(()-> m_driveTrain.resetEncoders(), m_driveTrain).withTimeout(.01));
+    m_resetDriveEncoderButton.whenPressed(new RunCommand(()-> m_driveTrain.resetEncoders(), m_driveTrain).withTimeout(.01));
 
     m_grabberExtendButton.whenHeld(m_extendGrabber);
-    m_grabberRetractButton.whenHeld(m_retractGrabber);
+    //m_grabberRetractButton.whenHeld(m_retractGrabber);
     m_grabberLiftButton.whenHeld(m_liftGrabber);
     m_grabberDropButton.whenHeld(m_dropGrabber);
 
