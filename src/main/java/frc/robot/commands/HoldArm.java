@@ -29,9 +29,9 @@ public class HoldArm extends CommandBase{
     @Override
     public void execute() {
 
+        m_goalPos = m_linkageSystem.m_goalPos;
         double currentPos = m_linkageSystem.getEncoderValue();
         double error = m_goalPos - currentPos;
-        m_goalPos = m_linkageSystem.m_goalPos;
 
         m_linkageSystem.runX(error/2);
 
