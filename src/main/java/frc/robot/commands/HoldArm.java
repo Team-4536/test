@@ -13,6 +13,8 @@ public class HoldArm extends CommandBase{
 
         m_linkageSystem = linkageSystem;
 
+        m_goalPos = m_linkageSystem.getEncoderValue();
+
         addRequirements(m_linkageSystem);
 
     }

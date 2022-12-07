@@ -47,9 +47,9 @@ public class LinkageSystem extends SubsystemBase{
         
     }
 
-    public void setGoalPos(double onorato){
+    public void setGoalPos(double pos){
 
-        m_goalPos = onorato;
+        m_goalPos = pos;
         
     }
     
